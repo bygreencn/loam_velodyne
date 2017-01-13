@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(loam_velodyne-daobilige-su)
+project(loam_velodyne_daobilige_su)
 
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
@@ -68,24 +68,6 @@ install(DIRECTORY launch rviz_cfg
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-if (CATKIN_ENABLE_TESTING)
-  find_package(rostest REQUIRED)
-  # TODO: Download test data
-  catkin_download_test_data(${PROJECT_NAME}_test_data.tar.gz
-    https://dl.dropboxusercontent.com/s/y4hn486461tfmpm/velodyne_loam_test_data.tar.gz
-    MD5 3d5194e6981975588b7a93caebf79ba4)
-  add_custom_target(${PROJECT_NAME}_test_data
-    COMMAND ${CMAKE_COMMAND} -E tar -xzf velodyne_loam_test_data.tar.gz
-    DEPENDS ${PROJECT_NAME}_test_data.tar.gz)
-  configure_file(tests/loam.test.in
-                 ${PROJECT_BINARY_DIR}/test/loam.test)
-  add_rostest(${PROJECT_BINARY_DIR}/test/loam.test
-    DEPENDENCIES
-      ${PROJECT_NAME}_test_data
-      scanRegistration
-      laserOdometry
-      laserMapping
-      transformMaintenance)
-endif()
+
 
 
